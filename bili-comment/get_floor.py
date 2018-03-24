@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import urllib,urllib2
 import json
+import time
 from sys import argv
 
 def get_floor(av_number) :
@@ -30,4 +31,6 @@ def get_floor(av_number) :
     #return json_data['data']['replies']['floor']
 
 #print get_floor(argv[1])
-print get_floor('12203888')
+while True :
+    print get_floor('810872')
+    time.sleep(1)
