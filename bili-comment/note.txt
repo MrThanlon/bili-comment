@@ -11,4 +11,4 @@ Connection: keep-alive
 Upgrade-Insecure-Requests: 1
 Cache-Control: max-age=0
 
-https://api.kaaass.net/biliapi/user/login/
+https://api.kaaass.net/biliapi/user/login

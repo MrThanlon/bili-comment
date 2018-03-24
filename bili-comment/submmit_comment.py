@@ -5,6 +5,8 @@ from sys import argv
 #av_number = argv[1]
 #comment_message =argv[2]#评论的内容
 #user_cookie = argv[3] #登录后的cookie
+#def get_csrf(av_number,user_cookie) : #csrf就是cookie里的bili_jct
+
 
 def submmit_comment(av_number,comment_message,user_cookie) :
     post_data = {'oid': av_number,
@@ -12,7 +14,7 @@ def submmit_comment(av_number,comment_message,user_cookie) :
 			             'message': comment_message,
 			             'plat':'1',
 			             'jsonp':'jsonp',
-			             'csrf':'13338c4f19c24cb911b07c272504d96c'
+			             'csrf':get_csrf #需要修改
 			             }
     post_data_urlencode = urllib.urlencode(post_data)
 

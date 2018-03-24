@@ -34,6 +34,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bili.conf" />
+    <Content Include="bili_pubkey.pem" />
+    <Content Include="bili_pubkey_p1.pem" />
     <Content Include="note.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
