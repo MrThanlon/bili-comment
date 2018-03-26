@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#获取cookie，需要 用户名（邮箱或手机号），密码
 import requests
 import rsa
 
@@ -7,9 +8,9 @@ import rsa
 def get_access_key_reqs(user,passwd) :
     post_data = {'user':user,'passwd':passwd}
     access_key_data = requests.post("https://api.kaaass.net/biliapi/user/login",post_data)
-    print access_key_data.status_code
+    #print access_key_data.status_code
     if access_key_data.status_code == 200 :
-        access_key_text = access_key_res.text.decode('utf-8')
+        access_key_text = access_key_data.text.decode('utf-8')
         key1 = access_key_text.find('access_key')
         access_key = access_key_text[key1+13 : access_key_text.find('"',key1+14)] #13也一样
         #print access_key
@@ -22,13 +23,13 @@ def get_cookie(key) :
     url_cookie = 'https://api.kaaass.net/biliapi/user/sso?access_key=' + key
     cookie_res = requests.get(url_cookie)
     if cookie_res.status_code == 200 :
-        cookie_text = cookie_text.decode('utf-8')
+        cookie_text = cookie_res.text.decode('utf-8')
         key1 = cookie_text.find('cookie')  
         return cookie_text[key1+9 : cookie_text.find('"',key1+11)] #+9差不多的，待验证，不确定是9还是10，可能文档有坑
     else :
         raise RuntimeError('Error:failed to get cookie,' + str(cookie_res.status_code))
 
-#自己写的获取access_key的版本
+#自己写的获取access_key的版本，现在不可用
 def get_access_key_self(user,passwd) :
     hash_res = requests.get('http://passport.bilibili.com/login?act=getkey')
     tmp = hash_res.status_code
@@ -51,7 +52,5 @@ def get_access_key_self(user,passwd) :
 
     else :
         raise RuntimeError('Error:failed to get public key.')
-
-#def x2
-
-print get_access_key_self('sakura-wrx@outlook.com','sakura-wrx')
+#usage
+print get_cookie(get_access_key_reqs('sakura-wrx@outlook.com','sakura-wrx'))
