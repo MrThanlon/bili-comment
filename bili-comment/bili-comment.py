@@ -65,12 +65,12 @@ if av_number and floor and comment and cookie :
     if floor_int <= int(current_floor) :
         raise RuntimeError('The floor has been taken.')
     #检测cookie可用性，给av11259766发一条评论试试
-    if submmit_comment.submmit_comment('11259766','日常打卡',cookie,'2')[0] != 's' : #发送失败
-        raise RuntimeError('Cookie may be not available or need to submmit CAPTCHA.')
+    #if submmit_comment.submmit_comment('11259766','日常打卡',cookie,'2')[0] != 's' : #发送失败
+        #raise RuntimeError('Cookie may be not available or need to submmit CAPTCHA.')
 #开刷
 #查询楼层
-times =4 #循环提交评论用的，连刷5次会触发验证码好像
-floor_result = [0,0,0,0]
+#times =4 #循环提交评论用的，连刷5次会触发验证码好像
+floor_result = []
 if int(get_floor.get_floor(av_number,0)) > floor_int :
     raise RuntimeError('The floor has been taken.')
 get_sleep_microsecond = float(get_refresh)/1000
@@ -79,12 +79,20 @@ while int(get_floor.get_floor(av_number,0)) < floor_int-3:
     time.sleep(get_sleep_microsecond)
     #if argv[1] == '-v' :
         #print 'refresh'
+for times in range(4) : #提交4次
+    floor_result.append(submmit_comment.submmit_comment(av_number,comment,cookie,2)[1])
+    #print times
+    time.sleep(submmit_sleep_microsecond)
+#floor_result = [ submmit_comment.submmit_comment(av_number,comment,cookie,2)[1] for ans in range(4) : time.sleep(submmit_sleep_microsecond) ]
+'''
 while times >=1 :
-    floor_result[times] = submmit_comment.submmit_comment(av_number,comment,cookie,2)[0]
+    floor_result[times] = submmit_comment.submmit_comment(av_number,comment,cookie,2)[1]
     time.sleep(submmit_sleep_microsecond)
     times -= 1
-while times >=1 :
-    if floor_result[times] == floor :
+'''
+#while times >=1 :
+for floor_range in floor_result :
+    if floor_range == floor :
         print 'Done.Good luck.'
         raw_input()
         times = 9982
@@ -93,6 +101,8 @@ while times >=1 :
 if times != 9982 :
     print 'I am sorry.'
     raw_input()
+'''
 else :
     print 'Done.Good luck.'
     raw_input()
+'''
