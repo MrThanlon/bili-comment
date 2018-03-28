@@ -5,7 +5,7 @@ import rsa
 
 #thanks to BiliAPI(https://api.kaaass.net author:KAAAsS)
 #读取access_key
-def get_access_key_reqs(user,passwd) :
+def get_access_key_kaaass(user,passwd) :
     post_data = {'user':user,'passwd':passwd}
     access_key_data = requests.post("https://api.kaaass.net/biliapi/user/login",post_data)
     #print access_key_data.status_code
@@ -53,4 +53,4 @@ def get_access_key_self(user,passwd) :
     else :
         raise RuntimeError('Error:failed to get public key.')
 #usage
-print get_cookie(get_access_key_reqs('sakura-wrx@outlook.com','sakura-wrx'))
+#print get_cookie(get_access_key_kaaass('sakura-wrx@outlook.com','sakura-wrx'))

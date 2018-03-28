@@ -4,14 +4,14 @@ from sys import argv
 import urllib,urllib2
 import time
 
-#from login_cookie import get_access_key_reqs
 import submmit_comment
 import get_floor
+import login_cookie
 #import check_cookie
 
 #读取配置文件
-#username = ''
-#password = ''
+username = ''
+password = ''
 av_number = ''
 floor = ''
 comment = ''
@@ -56,6 +56,11 @@ for line in conf_lines :
     else :
         cookie = line[space_sign1 : ] #cookie可能有空格
 floor_int = int(floor)
+#cookie或者user/password必须有一个
+if not cookie or (username and password) :
+    raise RuntimeError('No cookie or username.')
+if not cookie :
+    cookie = login_cookie.get_cookie(login_cookie.get_access_key_kaaass(username,password))
 
 #检测conf有效性
 if av_number and floor and comment and cookie :
@@ -65,8 +70,8 @@ if av_number and floor and comment and cookie :
     if floor_int <= int(current_floor) :
         raise RuntimeError('The floor has been taken.')
     #检测cookie可用性，给av11259766发一条评论试试
-    #if submmit_comment.submmit_comment('11259766','日常打卡',cookie,'2')[0] != 's' : #发送失败
-        #raise RuntimeError('Cookie may be not available or need to submmit CAPTCHA.')
+    if submmit_comment.submmit_comment('11259766','日常打卡',cookie,'2')[0] != 's' : #发送失败
+        raise RuntimeError('Cookie may be not available or need to submmit CAPTCHA.')
 #开刷
 #查询楼层
 #times =4 #循环提交评论用的，连刷5次会触发验证码好像

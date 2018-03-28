@@ -5,10 +5,7 @@ import json
 from sys import argv
 import get_floor
 
-#av_number_submmit = argv[1]
-#comment_message =argv[2]#评论的内容
-#user_cookie = argv[3] #登录后的cookie
-#def get_csrf(av_number_submmit,user_cookie) : #csrf就是cookie里的bili_jct
+#常见code，0=正常;61001=实名制;未绑定手机号;12015=发送4次以上需要验证码;
 
 #返回两个变量，第一个变量：成功为's'，失败为'f'，注意如果是usage_arg = 0则不做判断一律返回's'
 #usage_arg为工作模式，指定返回的第二个变量，
@@ -50,7 +47,7 @@ def submmit_comment(av_number_submmit,comment_message,user_cookie,usage_arg) :
     #读取rpid
     response_add = json.loads(res_data)
     #核对rpid和rpid_str，感觉不是很需要
-    if response_add['code'] != 0 : #正常是0，需要验证码是12015，目前没能力处理验证码，抱歉
+    if response_add['code'] != 0 : #正常是0，其他情况看上面，目前没能力处理验证码，抱歉
         return 'e',response_add['code']
     elif usage_arg == 1 :
         return 's',response_add['data']['rpid']
@@ -61,3 +58,6 @@ def submmit_comment(av_number_submmit,comment_message,user_cookie,usage_arg) :
         return 'e',response_add['code']
     else :
         return 's',floor
+
+#usage
+print submmit_comment('11259766','评论测试','sid=iya1ammw; DedeUserID=305660731; DedeUserID__ckMd5=ed25098e9f842b65; SESSDATA=5b179f0a%2C1522260706%2C06440c96; bili_jct=9c50d2fa663a7b8e1a472d5545b15177',2)

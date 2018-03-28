@@ -33,6 +33,9 @@
     <Compile Include="just_for_fun.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="up_dynamic.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|PythonCore|2.7" />
