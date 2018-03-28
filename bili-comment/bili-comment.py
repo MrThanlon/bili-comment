@@ -3,6 +3,7 @@
 from sys import argv
 import urllib,urllib2
 import time
+import thread
 
 import submmit_comment
 import get_floor
@@ -73,9 +74,20 @@ if av_number and floor and comment and cookie :
     if submmit_comment.submmit_comment('11259766','日常打卡',cookie,'2')[0] != 's' : #发送失败
         raise RuntimeError('Cookie may be not available or need to submmit CAPTCHA.')
 #开刷
-#查询楼层
-#times =4 #循环提交评论用的，连刷5次会触发验证码好像
-floor_result = []
+#查询楼层（多线程，未完成）
+def floor_init(thread_total) : #thread_total=查询使用的线程数
+    floor_result_m = []
+    if int(get_floor.get_floor(av_number,0)) > floor_int :
+        raise RuntimeError('The floor has been taken.')
+    get_sleep_microsecond = float(get_refresh)/1000  #感觉这个可以不用，拖慢了，查楼不用验证码
+    
+def floor_cycle(av_number_c,floor_set_c) :
+    while (floor_set_c - 3) >= get_floor.get_floor(av_number_c,0) : #这一段可以优化，get_floor初始化会占用资源
+        time.sleep(get_sleep_microsecond)
+
+
+#查询楼层（单线程）
+floor_result = []#循环提交评论用的，连刷5次会触发验证码好像
 if int(get_floor.get_floor(av_number,0)) > floor_int :
     raise RuntimeError('The floor has been taken.')
 get_sleep_microsecond = float(get_refresh)/1000
