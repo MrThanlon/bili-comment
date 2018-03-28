@@ -51,6 +51,10 @@
     <Content Include="bili_pubkey_p1.pem">
       <Publish>True</Publish>
     </Content>
+    <Content Include="config-example.json">
+      <Publish>True</Publish>
+    </Content>
+    <Content Include="config.json" />
     <Content Include="note.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

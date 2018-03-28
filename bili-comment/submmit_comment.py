@@ -9,8 +9,8 @@ import get_floor
 
 #返回两个变量，第一个变量：成功为's'，失败为'f'，注意如果是usage_arg = 0则不做判断一律返回's'
 #usage_arg为工作模式，指定返回的第二个变量，
-#若成功，0返回响应，1返回rpid，2返回具体楼层，如果是热门视频可能获取不到楼层，因为这个只仅读取第一页20个评论，后期可能更新，主要看你们发不发issues，
-#若失败，0返回响应，1返回code，2返回code，成功的code为0，
+#若成功，0返回响应，1返回rpid(int，2返回具体楼层(str，如果是热门视频可能获取不到楼层，因为这个只仅读取第一页20个评论，后期可能更新，主要看你们发不发issues，
+#若失败，0返回响应，1返回code(int，2返回code(int，成功的code为0(int，
 #若usage_arg为0，无论如何第一个变量都是字符's'
 #快刷时建议使用0，需要准确读取建议用2，1的话rpid一般没什么卵用
 def submmit_comment(av_number_submmit,comment_message,user_cookie,usage_arg) :
@@ -60,4 +60,4 @@ def submmit_comment(av_number_submmit,comment_message,user_cookie,usage_arg) :
         return 's',floor
 
 #usage
-print submmit_comment('11259766','评论测试','sid=iya1ammw; DedeUserID=305660731; DedeUserID__ckMd5=ed25098e9f842b65; SESSDATA=5b179f0a%2C1522260706%2C06440c96; bili_jct=9c50d2fa663a7b8e1a472d5545b15177',2)
+#print submmit_comment('11259766','评论测试','sid=iya1ammw; DedeUserID=305660731; DedeUserID__ckMd5=ed25098e9f842b65; SESSDATA=5b179f0a%2C1522260706%2C06440c96; bili_jct=9c50d2fa663a7b8e1a472d5545b15177',2)

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ProfilingTarget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectTarget>
+    <TargetProject>fa337cf8-195a-4f01-b14b-26c216fcd8a1</TargetProject>
+    <FriendlyName>bili-comment</FriendlyName>
+  </ProjectTarget>
+  <Reports>
+    <Report>
+      <Filename>C:\Users\hzy\AppData\Local\Temp\bili-comment_20180328.vsp</Filename>
+    </Report>
+  </Reports>
+</ProfilingTarget>
