@@ -8,7 +8,9 @@ usage 0=抢特定楼层，1=抢沙发
 username 用户名  
 password 密码  
 floor 要抢的楼层(usage=0可用)  
-up_uid 要抢的up主的沙发(usage=1可用)  
+av_number 视频的av号(usage=0可用)  
+up_uid 要抢的up主的沙发(usage=1可用) 
+comment 评论的内容
 get_refresh 楼层获取刷新间隔，毫秒  
 submmit_refresh 提交评论间隔，建议0  
 cookie 登录的cookie，可以没有，u/p二选一，建议用cookie  
