@@ -1,7 +1,7 @@
 # bili-comment
 哔哩哔哩（https://www.bilibili.com ），抢楼，抢沙发  
-感谢@KAAAsS( https://kaaass.net )提供获取cookie的方式，没有他我就无法完成使用用户名和密码登录的功能
-不要恶意使用  
+感谢@KAAAsS( https://kaaass.net )提供获取cookie的方式，没有他我就无法完成使用用户名和密码登录的功能  
+请不要恶意使用  
 主程序是bili-comment.py，配置文件是config.json，可以复制config-example.json  
 参数说明：  
 usage 0=抢特定楼层，1=抢沙发  
