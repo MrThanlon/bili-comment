@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #核心，提交评论，需要 cookie，av号，暂不支持楼中楼
 import urllib,urllib2
+import requests
 import json
 from sys import argv
 import get_floor
@@ -24,7 +25,7 @@ def submmit_comment(av_number_submmit,comment_message,user_cookie,usage_arg) :
 			             'jsonp':'jsonp',
 			             'csrf':csrf
 			             }
-    post_data_urlencode = urllib.urlencode(post_data)
+    #post_data_urlencode = urllib.urlencode(post_data)
 
     url_com = 'https://api.bilibili.com/x/v2/reply/add'
     headerdata = {'Host':'api.bilibili.com',
@@ -39,9 +40,12 @@ def submmit_comment(av_number_submmit,comment_message,user_cookie,usage_arg) :
                             'Accept-Language': 'zh-CN,zh;q=0.9',
                             'Cookie': user_cookie
                             }
+    '''  #urllib以后不会再用了
     req = urllib2.Request(url_com,post_data_urlencode,headerdata)
     #print req
     res_data = urllib2.urlopen(req).read() #发送完成，0可以返回了
+    '''
+    res_data = requests.post(url_com,post_data,headers = headerdata).content
     if usage_arg == 0 :
         return 's',res_data
     #读取rpid
@@ -60,4 +64,4 @@ def submmit_comment(av_number_submmit,comment_message,user_cookie,usage_arg) :
         return 's',floor
 
 #usage
-#print submmit_comment('11259766','评论测试','sid=iya1ammw; DedeUserID=305660731; DedeUserID__ckMd5=ed25098e9f842b65; SESSDATA=5b179f0a%2C1522260706%2C06440c96; bili_jct=9c50d2fa663a7b8e1a472d5545b15177',2)
+#print submmit_comment('11259766','评论测试','finger=edc6ecda; LIVE_BUVID=AUTO7315218785203016; buvid3=7C1ECFCC-7DA1-488E-8FF6-B9FAFC5BC5C098506infoc; fts=1521909419; DedeUserID=25347081; DedeUserID__ckMd5=b2c786d40b13b2da; SESSDATA=f287f7fd%2C1524501437%2Cbc75e107; bili_jct=9441058fb43076256a92c21196414056; sid=7x7zgrqr; UM_distinctid=1625d538f73383-053161941a31e1-4446062d-100200-1625d538f74806; im_notify_type_25347081=0; _dfcaptcha=e2371800d901eee808e317bd95e89fb1',2)

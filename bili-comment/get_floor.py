@@ -10,6 +10,7 @@ from sys import argv
 #rpid != 0:读取所在楼层，如果找不到则返回e
 #rpid为int，返回str
 def get_floor(av_number_get_floor,rpid) : 
+    #这里应该可以用https，不过查楼层没必要了
     av_url = 'http://api.bilibili.com/x/reply?oid=' + av_number_get_floor + '&type=1&pn=1'
     #大概不需要
     headerdata = {'Host':'api.bilibili.com',

@@ -44,7 +44,6 @@
     <Content Include="bili-example.conf">
       <Publish>True</Publish>
     </Content>
-    <Content Include="bili.conf" />
     <Content Include="bili_pubkey.pem">
       <Publish>True</Publish>
     </Content>
