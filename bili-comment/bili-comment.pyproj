@@ -29,8 +29,14 @@
     </Compile>
     <Compile Include="get_floor.py" />
     <Compile Include="login_cookie.py" />
+    <Compile Include="logout.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="submmit_comment.py" />
     <Compile Include="just_for_fun.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="test_multi-thread.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="up_dynamic.py">

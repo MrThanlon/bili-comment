@@ -52,5 +52,5 @@ def get_access_key_self(user,passwd) :
 
     else :
         raise RuntimeError('Error:failed to get public key.')
-#usage
-#print get_cookie(get_access_key_kaaass('sakura-wrx@outlook.com','sakura-wrx'))
+if __name__ == '__main__' :
+    print get_cookie(get_access_key_kaaass('sakura-wrx@outlook.com','sakura-wrx'))

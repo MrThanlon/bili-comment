@@ -54,5 +54,5 @@ def get_floor(av_number_get_floor,rpid) :
         else :
             return 'e'
 
-
-#print get_floor('11259766',0)
+if __name__ == '__main__' :
+    print get_floor('11259766',0)

@@ -63,5 +63,5 @@ def submmit_comment(av_number_submmit,comment_message,user_cookie,usage_arg) :
     else :
         return 's',floor
 
-#usage
-#print submmit_comment('11259766','评论测试','finger=edc6ecda; LIVE_BUVID=AUTO7315218785203016; buvid3=7C1ECFCC-7DA1-488E-8FF6-B9FAFC5BC5C098506infoc; fts=1521909419; DedeUserID=25347081; DedeUserID__ckMd5=b2c786d40b13b2da; SESSDATA=f287f7fd%2C1524501437%2Cbc75e107; bili_jct=9441058fb43076256a92c21196414056; sid=7x7zgrqr; UM_distinctid=1625d538f73383-053161941a31e1-4446062d-100200-1625d538f74806; im_notify_type_25347081=0; _dfcaptcha=e2371800d901eee808e317bd95e89fb1',2)
+if __name__ == '__main__' :
+    print submmit_comment('11259766','评论测试','finger=edc6ecda; LIVE_BUVID=AUTO7315218785203016; buvid3=7C1ECFCC-7DA1-488E-8FF6-B9FAFC5BC5C098506infoc; fts=1521909419; DedeUserID=25347081; DedeUserID__ckMd5=b2c786d40b13b2da; SESSDATA=f287f7fd%2C1524501437%2Cbc75e107; bili_jct=9441058fb43076256a92c21196414056; sid=7x7zgrqr; UM_distinctid=1625d538f73383-053161941a31e1-4446062d-100200-1625d538f74806; im_notify_type_25347081=0; _dfcaptcha=e2371800d901eee808e317bd95e89fb1',2)
