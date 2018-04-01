@@ -9,9 +9,9 @@ from sys import argv
 #rpid = 0:读取最高楼层
 #rpid != 0:读取所在楼层，如果找不到则返回e
 #rpid为int，返回str
-def get_floor(av_number_get_floor,rpid) : 
+def get_floor(av_number,rpid) : 
     #这里应该可以用https，不过查楼层没必要了
-    av_url = 'http://api.bilibili.com/x/reply?oid=' + av_number_get_floor + '&type=1&pn=1'
+    av_url = 'http://api.bilibili.com/x/reply?oid=' + av_number + '&type=1&pn=1'
     #大概不需要
     headerdata = {'Host':'api.bilibili.com',
                             'Connection':'keep-alive',
@@ -55,4 +55,9 @@ def get_floor(av_number_get_floor,rpid) :
             return 'e'
 
 if __name__ == '__main__' :
-    print get_floor('11259766',0)
+    #print get_floor('11259766',0)
+    #print get_floor('810872',0)
+    tn = 0
+    while True :
+        print (get_floor('810872',0) + ':') , str(tn)
+        tn += 1

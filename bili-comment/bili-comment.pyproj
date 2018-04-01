@@ -36,7 +36,10 @@
     <Compile Include="just_for_fun.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="test_multi-thread.py">
+    <Compile Include="hw_multi-thread.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="sw_mutlti-thread.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="up_dynamic.py">
@@ -47,9 +50,6 @@
     <InterpreterReference Include="Global|PythonCore|2.7" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bili-example.conf">
-      <Publish>True</Publish>
-    </Content>
     <Content Include="bili_pubkey.pem">
       <Publish>True</Publish>
     </Content>

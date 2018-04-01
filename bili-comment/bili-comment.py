@@ -18,74 +18,30 @@ up_uid =''
 username = ''
 password = ''
 av_number = ''
-floor = ''
+floor = 0
 comment = ''
 get_refresh = '0'
 submmit_refresh = '0'
 cookie = ''
 
-def str_out(target_str,space_sign) : #读取配置文件用的
-    #space_sign = target_str.find(' ')
-    space_sign2 = target_str.find(' ',space_sign+1)
-    if space_sign2 > 0 :
-            return target_str[space_sign+1 : space_sign2]
-    else :
-        return target_str[space_sign+1 : ]
-
 #json版配置文件
 try :
     json_file = open('config.json','r')
     json_conf = json.load(json_file)
-    usage = json_conf['usage']
-    username = json_conf['username']
-    password = json_conf['password']
-    up_uid = json_conf['up_uid']
-    av_number = json_conf['av_number']
-    floor = json_conf['floor']
-    comment = json_conf['comment']
-    get_refresh = json_conf['get_refresh']
-    submmit_refresh = json_conf['submmit_refresh']
-    cookie = json_conf['cookie']
+    usage = json_conf['usage'] #int
+    username = json_conf['username'] #str
+    password = json_conf['password'] #str
+    up_uid = json_conf['up_uid'] #str
+    av_number = json_conf['av_number'] #str
+    floor = json_conf['floor'] #int
+    comment = json_conf['comment'] #str
+    get_refresh = json_conf['get_refresh'] #int
+    submmit_refresh = json_conf['submmit_refresh'] #int
+    cookie = json_conf['cookie'] #str
 except KeyError :
-    print ""
-#反正什么都不做就对了，是这样写吗？我不知道诶
+    pass
 
-#读取配置文件，大概后期会改成json格式，已经改了
-'''
-conf_path = 'bili.conf'
-conf_file = open(conf_path,'r')
-conf_lines = conf_file.readlines()
-for line in conf_lines :
-    sharp_sign=line.find('#')
-    if sharp_sign != -1 : #去除注释
-        line = line[0 : sharp_sign]
-    space_sign1 = line.find(' ')
-    var_type = line[0 : space_sign1]
-    if var_type == 'usage' :
-        usage = str_out(line,space_sign1)
-    if var_type == 'up_uid' :
-        up_uid = str_out(line,space_sign1)
-    if var_type == 'username' :
-        username = str_out(line,space_sign1)
-    elif var_type == 'password' :
-        password = str_out(line,space_sign1)
-    elif var_type == 'av_number' :
-        av_number = str_out(line,space_sign1)
-    elif var_type == 'floor' :
-        floor = str_out(line,space_sign1)
-    elif var_type == 'comment' :
-        comment = line[space_sign1 : ] #comment可能有空格
-    elif var_type == 'submmit_refresh' :
-        submmit_refresh = str_out(line,space_sign1)
-    elif var_type == 'get_refresh' :
-        get_refresh = str_out(line,space_sign1)
-    elif var_type == 'submmit_refresh' :
-        submmit_refresh = str_out(line,space_sign1)
-    else :
-        cookie = line[space_sign1 : ] #cookie可能有空格
-'''
-floor_int = int(floor)
-get_sleep_microsecond = float(get_refresh)/1000 #感觉这个可以不用，拖慢了，查楼不用验证码
+get_sleep_microsecond = float(get_refresh)/1000 #这个可以不用，会拖慢，查楼不弹验证码，仅用于降低cpu使用
 submmit_sleep_microsecond = float(submmit_refresh)/1000
 #cookie或者user/password必须有一个
 if not (cookie or (username and password)) :
@@ -97,23 +53,13 @@ if not cookie :
 if comment :
     current_floor = get_floor.get_floor(av_number,0)
     if current_floor == 'e' :
-        raise 'Failed to get floors.'
-    if floor_int <= int(current_floor) :
+        raise RuntimeError('Failed to get floors.')
+    if floor <= int(current_floor) :
         raise RuntimeError('The floor has been taken.')
     #检测cookie可用性，给av11259766发一条评论试试
-    #if submmit_comment.submmit_comment('11259766','日常打卡',cookie,'2')[0] != 's' : #发送失败
-        #raise RuntimeError('Cookie may be not available or need to submmit CAPTCHA.')
+    if submmit_comment.submmit_comment('11259766','日常打卡',cookie,'2')[0] != 's' : #发送失败
+        raise RuntimeError('Cookie may be not available or need to submmit CAPTCHA.')
 #开刷
-#查询楼层（多线程，尚未完成，不要使用）
-def floor_init(thread_total) : #thread_total=查询使用的线程数
-    floor_result_m = []
-    if int(get_floor.get_floor(av_number,0)) > floor_int :
-        raise RuntimeError('The floor has been taken.')
-    
-def floor_cycle(av_number_c,floor_set_c) :
-    while (floor_set_c - 3) >= get_floor.get_floor(av_number_c,0) : #这一段可以优化，get_floor初始化会占用资源
-        time.sleep(get_sleep_microsecond)
-
 #这段比较丑陋，我以后会改的吧
 #抢沙发模式
 if usage == 1 : 
@@ -135,17 +81,41 @@ if usage == 1 :
     quit
 
 #抢楼模式
+#查询楼层（多线程，未测试，不要使用）
+global fin_flag
+fin_flag = 0
+def floor_st(av_number , floor , thread_number) :
+    global fin_flag
+    while True : 
+        if fin_flag == 1 :
+            thread.exit()
+        current_floor = get_floor.get_floor(av_number , 0)#这一段可以优化，get_floor初始化会占用资源
+        #print current_floor + ':' + str(thread_number)
+        if (floor - 4) >= current_floor :
+            fin_flag = 1 #大概没必要用锁吧
+            thread.exit()
+        time.sleep(get_sleep_microsecond) #建议0
+
+def floor_cycle(av_number , floor , thread_total) : #thread_total=使用的线程数，推荐130左右，大约每秒200次
+    for tn in range(thread_total - 1) :
+        thread.start_new_thread(floor_st , (av_number , floor ,))
+    while True :
+        time.sleep(0.1) #python没有线程优先级，这个需要自行调校
+        if fin_flag == 1 :
+            break
+    #print 'done'
+
 if usage == 0 :
     if not (av_number and floor) :
         raise RuntimeError('config file error.')
     #查询楼层（单线程）
-    floor_result = []#循环提交评论用的，连刷5次会触发验证码好像
-    if int(get_floor.get_floor(av_number,0)) > floor_int :
+    if int(get_floor.get_floor(av_number , 0)) > floor :
         raise RuntimeError('The floor has been taken.')
-    while int(get_floor.get_floor(av_number,0)) < floor_int-3:
+    while int(get_floor.get_floor(av_number , 0)) < floor - 4:
         time.sleep(get_sleep_microsecond)
         #if argv[1] == '-v' :
             #print 'refresh'
+    floor_result = []#接收评论后的返回
     for times in range(4) : #提交4次
         floor_result.append(submmit_comment.submmit_comment(av_number,comment,cookie,2)[1])
         #print times

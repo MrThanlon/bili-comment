@@ -3,7 +3,7 @@
 
 import requests
 
-def logout(cookie_logout) :
+def logout(cookie) :
     url_logout_1 = 'https://account.bilibili.com/login?act=exit'
     url_logout_2 = 'https://passport.bilibili.com/login?act=exit'
     header_logout_1 = {
@@ -14,7 +14,7 @@ def logout(cookie_logout) :
                         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
                         'Accept-Encoding': 'gzip, deflate, br',
                         'Accept-Language': 'zh-CN,zh;q=0.9',
-                        'Cookie': cookie_logout
+                        'Cookie': cookie
                         }
     header_logout_2 = {
                         'Host': 'passport.bilibili.com',
@@ -24,7 +24,7 @@ def logout(cookie_logout) :
                         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
                         'Accept-Encoding': 'gzip, deflate, br',
                         'Accept-Language': 'zh-CN,zh;q=0.9',
-                        'Cookie': cookie_logout
+                        'Cookie': cookie
                         }
     #requests.get(url_logout_1 , headers = header_logout_1)
     res_logout = requests.get(url_logout_2 , header_logout_2).content

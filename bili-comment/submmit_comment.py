@@ -14,13 +14,13 @@ import get_floor
 #若失败，0返回响应，1返回code(int，2返回code(int，成功的code为0(int，
 #若usage_arg为0，无论如何第一个变量都是字符's'
 #快刷时建议使用0，需要准确读取建议用2，1的话rpid一般没什么卵用
-def submmit_comment(av_number_submmit,comment_message,user_cookie,usage_arg) :
+def submmit_comment(av_number,comment,cookie,usage_arg) :
     #csrf就是cookie里的bili_jct
-    key5 = user_cookie.find('bili_jct')
-    csrf = user_cookie[key5 + 9 : key5 + 41] #32total
-    post_data = {'oid': av_number_submmit,
+    key5 = cookie.find('bili_jct')
+    csrf = cookie[key5 + 9 : key5 + 41] #32total
+    post_data = {'oid': av_number,
 			             'type':'1',
-			             'message': comment_message,
+			             'message': comment,
 			             'plat':'1',
 			             'jsonp':'jsonp',
 			             'csrf':csrf
@@ -35,10 +35,10 @@ def submmit_comment(av_number_submmit,comment_message,user_cookie,usage_arg) :
                             'Origin': 'https://www.bilibili.com',
                             'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36',
                             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                            'Referer': 'https://www.bilibili.com/video/av'+ av_number_submmit,
+                            'Referer': 'https://www.bilibili.com/video/av'+ av_number,
                             'Accept-Encoding': 'gzip, deflate, br',
                             'Accept-Language': 'zh-CN,zh;q=0.9',
-                            'Cookie': user_cookie
+                            'Cookie': cookie
                             }
     '''  #urllib以后不会再用了
     req = urllib2.Request(url_com,post_data_urlencode,headerdata)
@@ -50,14 +50,13 @@ def submmit_comment(av_number_submmit,comment_message,user_cookie,usage_arg) :
         return 's',res_data
     #读取rpid
     response_add = json.loads(res_data)
-    #核对rpid和rpid_str，感觉不是很需要
     if response_add['code'] != 0 : #正常是0，其他情况看上面，目前没能力处理验证码，抱歉
         return 'e',response_add['code']
     elif usage_arg == 1 :
         return 's',response_add['data']['rpid']
     #读取楼层,使用get_floor_rpid，注意热门视频有可能无法获取
     rpid = response_add['data']['rpid']
-    floor = get_floor.get_floor(av_number_submmit,rpid)
+    floor = get_floor.get_floor(av_number,rpid)
     if floor == 'e' :
         return 'e',response_add['code']
     else :
