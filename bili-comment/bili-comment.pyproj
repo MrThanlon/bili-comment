@@ -28,6 +28,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="get_floor.py" />
+    <Compile Include="get_floor_threading.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="login_cookie.py" />
     <Compile Include="logout.py">
       <SubType>Code</SubType>
@@ -36,10 +39,10 @@
     <Compile Include="just_for_fun.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="hw_multi-thread.py">
+    <Compile Include="get_floor_multi.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="sw_mutlti-thread.py">
+    <Compile Include="get_floor_thread.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="up_dynamic.py">

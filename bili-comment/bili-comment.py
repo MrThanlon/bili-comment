@@ -82,7 +82,7 @@ if usage == 1 :
 
 #抢楼模式
 #查询楼层（多线程，未测试，不要使用）
-global fin_flag
+global fin_flag #停止信号，造轮子了，python signal不会用
 fin_flag = 0
 def floor_st(av_number , floor , thread_number) :
     global fin_flag
@@ -92,7 +92,7 @@ def floor_st(av_number , floor , thread_number) :
         current_floor = get_floor.get_floor(av_number , 0)#这一段可以优化，get_floor初始化会占用资源
         #print current_floor + ':' + str(thread_number)
         if (floor - 4) >= current_floor :
-            fin_flag = 1 #大概没必要用锁吧
+            fin_flag = 1
             thread.exit()
         time.sleep(get_sleep_microsecond) #建议0
 
