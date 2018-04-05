@@ -22,3 +22,6 @@
 <tr><th>floor_enabled</th><th>是否启用查楼多线程，0=禁用，1=启用，整数，默认0</tr></th>
 <tr><th>thread</th><th>线程数，多线程启用才可用，太快会被反爬，整数，默认5</tr></th>
 </table>
+#Requirements
+-Python2.7  
+-requests
