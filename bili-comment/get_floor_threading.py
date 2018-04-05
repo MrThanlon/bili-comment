@@ -10,8 +10,7 @@ def floor_st() :
     pass
     get_floor.get_floor(av_number)
 def floor_cycle(av_number , floor , thread_total) :
-    
-    threading.Thread(target = floor_st , name = )
+    threading.Thread(target = floor_st , name = 1)
 
 if __name__ == '__main__' :
     pass

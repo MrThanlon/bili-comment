@@ -20,7 +20,7 @@ def floor_st(av_number , floor , thread_number , lock) :
             lock.release()
             thread.exit()
         current_floor = get_floor.get_floor(av_number , 0)#这一段可以优化，get_floor初始化会占用资源
-        #print current_floor + ':' + str(thread_number)
+        print current_floor + '[' + str(thread_number) + ']'
         total_query += 1
         if (floor - 4) >= current_floor :
             fin_flag = 1 
@@ -41,20 +41,20 @@ def floor_cycle(av_number , floor , thread_total) : #thread_total=使用的线�
     #time.sleep(300)
     begin_time = time.time()
     while True :
-        print total_query
+        #print total_query
         time.sleep(0.1)
-        if total_query >= 500 :
-            fin_flag = 1
-            break
+        #if total_query >= 3000 :
+            #fin_flag = 1
+            #break
     total_time = str(time.time()-begin_time)
     #time.sleep(1)
-    print 'total time is ' + total_time
+    print 'total time is ' + total_time+ 's'
     begin_time = time.time()
     for tn in range(thread_total) :
         while locks[tn].locked() :
             fin_flag = 1
-    print 'wait for thread using ' + str(time.time() - begin_time)
+    print 'wait for thread using ' + str(time.time() - begin_time) + 's'
     print 'done'
 
 if __name__ == '__main__' :
-    floor_cycle('810872' , 105944 , 130)
+    floor_cycle('7' , 105944 , 5)
