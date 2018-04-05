@@ -10,7 +10,7 @@
 <tr><th>username</th><th>用户名</tr></th>
 <tr><th>password</th><th>密码</tr></th>
 <tr><th>cookie</th><th>api.bilibili.com的cookie，与主站应该一样，可以没有，<br />u&p/cookie二选一，建议用cookie</tr></th>
-<tr><th>sofa_mode</th><th>沙发模式，usqge=1可用</tr></th>
+<tr><th>sofa_mode</th><th>沙发模式，usage=1可用</tr></th>
 <tr><th>up_uid</th><th>要抢谁的沙发(usage=1可用)，字符串</tr></th>
 <tr><th>floor_mode</th><th>抢楼模式，usage=0可用</tr></th>
 <tr><th>av_number</th><th>视频的av号(usage=0可用)，字符串</tr></th>
