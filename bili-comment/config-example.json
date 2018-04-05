@@ -2,11 +2,19 @@
   "usage": 0,
   "username": "mrthanlon",
   "password": "hello_bilibili",
-  "up_uid": "25347081",
-  "av_number": "11259766",
-  "floor": 62,
+  "cookie": "abc=cba;wrx=hentai;key=value",
   "comment": "抢到了开心！",
+  "sofa_mode": {
+    "up_uid": "25347081"
+  },
+  "floor_mode": {
+    "av_number": "11259766",
+    "floor": 62
+  },
   "get_refresh": 0,
   "submmit_refresh": 0,
-  "cookie": "abc=cba;wrx=hentai;key=value"
+  "multithread": {
+    "floor_enabled": 0,
+    "thread": 5
+  }
 }

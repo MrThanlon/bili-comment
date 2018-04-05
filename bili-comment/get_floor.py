@@ -6,24 +6,25 @@ import json
 import time
 from sys import argv
 
+#大概不需要
+headerdata = {'Host':'api.bilibili.com',
+                        'Connection':'keep-alive',
+                        'Cache-Control': 'max-age=0',
+                        #'Accept': 'application/json, text/javascript, */*; q=0.01',
+                        'Upgrade-Insecure-Requests': '1',
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36',
+                        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+                        'Accept-Encoding': 'gzip, deflate, br',
+                        'Accept-Language': 'zh-CN,zh;q=0.9'#,
+                        #'Cookie': user_cookie #可以不需要
+                        }
+
 #rpid = 0:读取最高楼层
 #rpid != 0:读取所在楼层，如果找不到则返回e
 #rpid为int，返回str
 def get_floor(av_number,rpid) : 
     #这里应该可以用https，不过查楼层没必要了
     av_url = 'http://api.bilibili.com/x/reply?oid=' + av_number + '&type=1&pn=1'
-    #大概不需要
-    headerdata = {'Host':'api.bilibili.com',
-                            'Connection':'keep-alive',
-                            'Cache-Control': 'max-age=0',
-                            #'Accept': 'application/json, text/javascript, */*; q=0.01',
-                            'Upgrade-Insecure-Requests': '1',
-                            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36',
-                            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-                            'Accept-Encoding': 'gzip, deflate, br',
-                            'Accept-Language': 'zh-CN,zh;q=0.9'#,
-                            #'Cookie': user_cookie #可以不需要
-                            }
     '''#这一段有玄学问题，改用requests
     req = urllib2.Request(av_url,None)
     get_floor_res = urllib2.urlopen(req,timeout = 20)
